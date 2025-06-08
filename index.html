@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>면역력 부스트 건강제품 구매 페이지</title>
+<style>
+  /* Reset */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0; padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+  }
+  a {
+    color: #0078d7;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 15px 60px;
+  }
+  header {
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #0078d7;
+  }
+  nav a {
+    margin-left: 20px;
+    font-weight: 600;
+  }
+
+  /* Hero Section */
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #e7f4ff;
+    border-radius: 12px;
+    padding: 40px 30px;
+    margin: 30px 0;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .hero-text {
+    flex: 1 1 400px;
+  }
+  .hero-text h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #005ea3;
+  }
+  .hero-text p {
+    font-size: 1.15rem;
+    margin-bottom: 25px;
+    color: #333;
+  }
+  .hero-text button {
+    background-color: #0078d7;
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .hero-text button:hover {
+    background-color: #005ea3;
+  }
+  .hero-image {
+    flex: 1 1 300px;
+    max-width: 350px;
+  }
+  .hero-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  /* Section Titles */
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #0078d7;
+    border-left: 5px solid #0078d7;
+    padding-left: 10px;
+  }
+
+  /* Product Details */
+  .product-details ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #444;
+    font-size: 1.05rem;
+  }
+  .accordion {
+    cursor: pointer;
+    padding: 15px 20px;
+    background-color: #0078d7;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 8px;
+    user-select: none;
+    margin-top: 25px;
+    max-width: 350px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  .accordion:hover {
+    background-color: #005ea3;
+  }
+  .panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    background: #e1f0ff;
+    border-radius: 0 0 12px 12px;
+    padding: 0 20px;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 40px;
+  }
+  .panel p {
+    margin: 15px 0;
+  }
+
+  /* Reviews */
+  .reviews {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+  .review-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    flex: 1 1 300px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  .review-card img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+  .review-content {
+    flex-grow: 1;
+  }
+  .stars {
+    color: #fbc02d;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  .review-content p {
+    margin: 0;
+    font-size: 1rem;
+    color: #444;
+  }
+
+  /* Promo Banner */
+  .promo-banner {
+    background-color: #0078d7;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    padding: 18px 10px;
+    border-radius: 12px;
+    font-size: 1.15rem;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  /* Purchase Options */
+  .purchase-options label {
+    display: block;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 6px;
+  }
+  select, input[type=number] {
+    width: 100%;
+    max-width: 220px;
+    padding: 10px 12px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  .total-price {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0078d7;
+  }
+
+  /* Payment Form */
+  form.payment-form {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin-top: 20px;
+  }
+  form.payment-form label {
+    font-weight: 600;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+  }
+  form.payment-form input[type=text],
+  form.payment-form input[type=tel],
+  form.payment-form select {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+  }
+  .checkbox-label {
+    margin-top: 20px;
+    font-weight: 500;
+    user-select: none;
+  }
+  .checkbox-label input {
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  form.payment-form button {
+    margin-top: 30px;
+    width: 100%;
+    background-color: #0078d7;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  form.payment-form button:hover {
+    background-color: #005ea3;
+  }
+
+  /* Trust Section */
+  .trust-section {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 60px;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    text-align: center;
+    max-width: 140px;
+  }
+  .trust-item img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 12px;
+  }
+  .trust-item p {
+    font-weight: 600;
+    color: #0078d7;
+  }
+
+  /* Footer */
+  footer {
+    background-color: #1a1a1a;
+    color: #ccc;
+    text-align: center;
+    padding: 25px 15px;
+    font-size: 0.9rem;
+  }
+  footer p {
+    margin: 5px 0;
+  }
+  footer a {
+    color: #77aaff;
+    margin: 0 8px;
+    font-weight: 500;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+    }
+    .hero-text, .hero-image {
+      flex: 1 1 auto;
+      max-width: 100%;
+    }
+    .reviews {
+      flex-direction: column;
+    }
+    .review-card {
+      max-width: 100%;
+    }
+    .trust-section {
+      gap: 40px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>면역케어</h1>
+  <nav aria-label="메인 내비게이션">
+    <a href="#">홈</a>
+    <a href="#">제품정보</a>
+    <a href="#">후기</a>
+    <a href="#">고객센터</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" aria-label="제품 소개">
+    <div class="hero-text">
+      <h2>면역력 부스트 건강제품</h2>
+      <p>바쁜 일상 속 건강을 지키는 최고의 선택! 자연 유래 성분으로 안전하게 면역력을 높여보세요.</p>
+      <button type="button" onclick="document.getElementById('package').focus()">지금 구매하기</button>
+    </div>
+    <div class="hero-image">
+      <img src="https://via.placeholder.com/350x350?text=제품+이미지" alt="면역력 부스트 건강제품" />
+    </div>
+  </section>
+
+  <section class="product-details" aria-label="제품 특징 및 복용법">
+    <h2 class="section-title">제품 특징</h2>
+    <ul>
+      <li>비타민 C, D 함유로 면역력 강화</li>
+      <li>천연 허브 추출물 사용</li>
+      <li>무첨가, 무방부제, 안심하고 복용 가능</li>
+    </ul>
+
+    <button class="accordion" aria-expanded="false" aria-controls="dosagePanel" id="dosageBtn">복용법 안내 보기</button>
+    <div class="panel" id="dosagePanel" role="region" aria-labelledby="dosageBtn">
+      <p>성인 기준, 하루 2정을 식사 후 물과 함께 섭취하세요. 어린이 및 임산부는 전문가 상담 후 복용 권장합니다.</p>
+    </div>
+  </section>
+
+  <section class="reviews" aria-label="고객 후기">
+    <div class="review-card">
+      <img src="https://via.placeholder.com/50" alt="사용자1" />
+      <div class="review-content">
+        <div class="stars" aria-label="별점 5점">★★★★★</div>
+        <p>면역력이 확실히 좋아진 느낌이에요. 피로가 많이 줄었어요!</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <img src="https://via.placeholder.com/50" alt="사용자2" />
+      <div class="review-content">
+        <div class="stars" aria-label="별점 4점">★★★★☆</div>
+        <p>꾸준히 먹으니 감기도 안 걸리고 좋네요.</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <img src="https://via.placeholder.com/50" alt="사용자3" />
+      <div class="review-content">
+        <div class="stars" aria-label="별점 5점">★★★★★</div>
+        <p>성분도 믿을 만하고 재구매 의사 100%입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="promo-banner" aria-label="프로모션 및 이벤트">
+    🎉 한정 타임세일! 3개월분 구매 시 10% 할인 + 무료배송 🎉
+  </section>
+
+  <section class="purchase-options" aria-label="구매 옵션 선택">
+    <h2 class="section-title">구매 옵션 선택</h2>
+    <label for="package">용량 선택</label>
+    <select id="package" name="package">
+      <option value="1month">1개월분</option>
+      <option value="3month">3개월분</option>
+      <option value="6month">6개월분</option>
+    </select>
+
+    <label for="quantity">수량</label>
+    <input type="number" id="quantity" name="quantity" min="1" value="1" />
+
+    <div class="total-price" id="totalPrice">총 금액: 30,000원</div>
+  </section>
+
+  <section aria-label="결제 정보 입력">
+    <h2 class="section-title">결제 정보 입력</h2>
+    <form class="payment-form" id="orderForm">
+      <label for="name">이름</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="phone">연락처</label>
+      <input type="tel" id="phone" name="phone" required />
+
+      <label for="address">배송지 주소</label>
+      <input type="text" id="address" name="address" required />
+
+      <label for="payment">결제 수단</label>
+      <select id="payment" name="payment" required>
+        <option value="">선택하세요</option>
+        <option value="card">신용/체크카드</option>
+        <option value="pay">간편결제</option>
+        <option value="bank">계좌이체</option>
+      </select>
+
+      <label class="checkbox-label">
+        <input type="checkbox" required />
+        개인정보 처리방침 및 구매 약관에 동의합니다.
+      </label>
+
+      <button type="submit">주문하기</button>
+    </form>
+  </section>
+
+  <section class="trust-section" aria-label="신뢰 요소 및 고객센터">
+    <div class="trust-item">
+      <img src="https://via.placeholder.com/80?text=SSL" alt="SSL 보안" />
+      <p>안전한 결제 SSL</p>
+    </div>
+    <div class="trust-item">
+      <img src="https://via.placeholder.com/80?text=배송" alt="빠른 배송" />
+      <p>빠른 배송 서비스</p>
+    </div>
+    <div class="trust-item">
+      <img src="https://via.placeholder.com/80?text=고객" alt="고객 지원" />
+      <p>24시간 고객센터</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 면역케어. All rights reserved.</p>
+  <p>
+    <a href="#">이용약관</a> | <a href="#">개인정보처리방침</a> | <a href="#">고객센터</a>
+  </p>
+</footer>
+
+<script>
+  // 아코디언 토글
+  const accordion = document.querySelector('.accordion');
+  const panel = document.querySelector('.panel');
+
+  accordion.addEventListener('click', () => {
+    const expanded = accordion.getAttribute('aria-expanded') === 'true';
+    accordion.setAttribute('aria-expanded', !expanded);
+    if (!expanded) {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } else {
+      panel.style.maxHeight = null;
+    }
+  });
+
+  // 구매 옵션에 따른 가격 계산
+  const packageSelect = document.getElementById('package');
+  const quantityInput = document.getElementById('quantity');
+  const totalPriceEl = document.getElementById('totalPrice');
+
+  // 각 패키지 가격 (원)
+  const priceMap = {
+    "1month": 30000,
+    "3month": 85000,
+    "6month": 160000
+  };
+
+  function updatePrice() {
+    const selectedPackage = packageSelect.value;
+    const quantity = parseInt(quantityInput.value) || 1;
+    const pricePerUnit = priceMap[selectedPackage] || 30000;
+    const total = pricePerUnit * quantity;
+    totalPriceEl.textContent = `총 금액: ${total.toLocaleString()}원`;
+  }
+
+  packageSelect.addEventListener('change', updatePrice);
+  quantityInput.addEventListener('input', updatePrice);
+
+  updatePrice();
+
+  // 주문 폼 제출 처리 (간단 예시)
+  const orderForm = document.getElementById('orderForm');
+  orderForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('주문이 접수되었습니다. 감사합니다!');
+    orderForm.reset();
+    updatePrice();
+  });
+</script>
+
+</body>
+</html>
